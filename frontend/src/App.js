@@ -5,6 +5,7 @@ import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 const API_END_POINT = process.env.REACT_APP_RAND_ENDPOINT || '/new-image';
@@ -16,24 +17,21 @@ const App = () => {
 
   const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}`;
 
-  const handleSearchSubmit = (e) => {
-    // some debugging here
-    // console.log(word);
-    // console.log(UNSPLASH_RAND_QUERY_STRING);
-    // first api call to random image
-    fetch(UNSPLASH_RAND_QUERY_STRING)
-      .then((res) => res.json())
-      .then((data) => {
-        // update existing image array
-        // save image
-        setImages([{ ...data, title: word }, ...images]);
-      })
-      .catch((err) => {
-        console.log(`the error is: ${err}`);
-      });
+  const handleSearchSubmit = async (e) => {
+    console.log(`now searching word: ${word}`);
     e.preventDefault();
 
+    try {
+      const result = await axios.get(UNSPLASH_RAND_QUERY_STRING);
+      console.log(`print our result out:`, result.data);
+      let data = result.data;
+      setImages([{ ...data, title: word }, ...images]);
+    } catch (error) {
+      console.log(`the error is ${error}`);
+    }
+
     // set the word to empty string
+    console.log('clear search form');
     setWord('');
   };
 
