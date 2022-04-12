@@ -77,14 +77,11 @@ def images():
     if request.method == "POST":
         # save images from the database
         image = request.get_json()
-        result = image_collection.insert_one(image)
 
         # update object type to string val only
-        myquery = {"_id": ObjectId(result.inserted_id)}
-        image["_id"] = str(result.inserted_id)
+        image["_id"] = str(image["id"])
         print("the image is: ", image)
         result = image_collection.insert_one(image)
-        image_collection.delete_one(myquery)
 
         return jsonify(
             {
