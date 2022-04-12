@@ -22,7 +22,7 @@ const App = () => {
     try {
       const result = await axios.get(ALL_SAVED_IMAGE_ROUTE);
       console.log(`print our result out:`, result.data);
-      let data = result.data;
+      let data = result.data.length > 0 ? result.data : [];
       setImages(data || []);
     } catch (error) {
       console.log(error);
@@ -61,7 +61,7 @@ const App = () => {
       const imageToBeSaved = images.find((img) => img.id === id);
       // post the data to route hosting img
       const result = await axios.post(ALL_SAVED_IMAGE_ROUTE, imageToBeSaved);
-      console.log('operation successful', result);
+      console.log('operation successful', result.data);
     } catch (err) {
       console.log(err);
     }
