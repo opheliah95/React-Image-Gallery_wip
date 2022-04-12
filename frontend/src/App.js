@@ -1,14 +1,14 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header";
-import Search from "./components/Search";
-import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header';
+import Search from './components/Search';
+import { useState } from 'react';
 
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 const UNSPLASH_SECRET = process.env.REACT_APP_UNSPLASH_SECRET;
 const UNSPLASH_RAND_PHOTO_URL = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_RAND_ENDPOINT}`;
 
 const App = () => {
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState('');
   const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}&client_id=${UNSPLASH_KEY}`;
 
   const handleSearchSubmit = (e) => {
@@ -28,7 +28,7 @@ const App = () => {
     e.preventDefault();
 
     // set the word to empty string
-    setWord("");
+    setWord('');
   };
 
   console.log(`word is now: ${word}`);
