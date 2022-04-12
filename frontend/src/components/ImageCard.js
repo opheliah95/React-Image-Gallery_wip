@@ -14,9 +14,11 @@ const ImageCard = ({ image, deleteEvent, saveEvent }) => {
         <Button variant="secondary" onClick={() => deleteEvent(image.id)}>
           Delete
         </Button>{' '}
-        <Button variant="primary" onClick={() => saveEvent(image.id)}>
-          Save
-        </Button>
+        {!image.saved && (
+          <Button variant="primary" onClick={() => saveEvent(image.id)}>
+            Save
+          </Button>
+        )}
       </Card.Body>
     </Card>
   );
