@@ -9,6 +9,7 @@ services:
       - ./frontend:/app # map everything else to the frontend
     environment:
       - CHOKIDAR_USEPOLLING=true
+    restart: always
   backend:
     build: ./api
     ports:
@@ -16,3 +17,4 @@ services:
     volumes:
       - /app/.venv # virenv contents stay the same
       - ./api:/app # map everything else to app folder
+    restart: always
