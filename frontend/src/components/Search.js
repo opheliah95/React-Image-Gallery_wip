@@ -1,15 +1,27 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import '../css/index.css';
 class Search extends React.Component {
-    render() {
-        return (
-        <Container>
+  render() {
+    return (
+      <Container className="mt-4">
+        <Row className="justify-content-center">
+          <Col xs={12} md={8} lg={6}>
+          <Form>
             <Row>
-                <Col>Search</Col>
-                <Col>This is a search box</Col>
+              <Col xs={9} md={9} lg={9}>
+                <Form.Control placeholder="Search for new image" />
+              </Col>
+              <Col xs={3} md={3}>
+                <Button type="submit">Search</Button>
+              </Col>
             </Row>
-        </Container>);
-    }
-};
+          </Form>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
 export default Search;
