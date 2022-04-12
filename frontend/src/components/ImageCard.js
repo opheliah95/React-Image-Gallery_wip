@@ -11,9 +11,10 @@ const ImageCard = ({ image, deleteEvent }) => {
         <Card.Text>
           Created by: {`${image.user.first_name} ${image.user.last_name}`}
         </Card.Text>
-        <Button variant="primary" onClick={() => deleteEvent(image.id)}>
+        <Button variant="secondary" onClick={() => deleteEvent(image.id)}>
           Delete
-        </Button>
+        </Button>{' '}
+        <Button variant="primary">Save</Button>
       </Card.Body>
     </Card>
   );
