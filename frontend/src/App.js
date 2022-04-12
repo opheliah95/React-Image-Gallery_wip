@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Search from './components/Search';
 import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -16,6 +16,20 @@ const App = () => {
   const [images, setImages] = useState([]);
 
   const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}`;
+  const ALL_SAVED_IMAGE_ROUTE = `${API_URL}/images`;
+
+  const getSavedImages = async () => {
+    try {
+      const result = await axios.get(ALL_SAVED_IMAGE_ROUTE);
+      console.log(`print our result out:`, result.data);
+      let data = result.data;
+      setImages(data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => getSavedImages(), []);
 
   const handleSearchSubmit = async (e) => {
     console.log(`now searching word: ${word}`);
