@@ -1,9 +1,10 @@
-from flask import request, Flask
+from flask import request, Flask, jsonify
 from requests import get
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS
-from mongo_client import insert_test_documents
+from mongo_client import client
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +16,10 @@ DEBUG = bool(os.getenv("DEBUG", True))
 
 # enable debug mode
 app.config["DEBUG"] = DEBUG
+
+# create database instances and collection
+gallery = client.gallery
+image_collection = gallery.images
 
 
 @app.route("/")
@@ -41,6 +46,19 @@ def get_image():
     image = data["urls"]["small"]
     print(image)
     return response.json()
+
+
+@app.route("/images", methods=["GET", "POST"])
+def images():
+    if request.method == "GET":
+        # read images from the database
+        search_word = request.args.get("query")
+        result = image_collection.find({"name": search_word})
+        result_json = jsonify([img for img in result])
+        return result_json
+    if request.method == "POST":
+        # save images from the database
+        return
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-import collections
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
@@ -24,6 +23,7 @@ client = MongoClient(
 
 # insert documents into the database
 def insert_test_documents():
+    """Insert data into the database"""
     db = client.image_db
     collection = db["items"]
     data = {
