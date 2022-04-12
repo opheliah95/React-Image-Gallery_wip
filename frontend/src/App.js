@@ -36,10 +36,15 @@ const App = () => {
     setWord('');
   };
 
+  // function to trigger delete function
+  const handleDeleteImage = (id) => {
+    setImages(images.filter((image) => image.id !== id));
+  };
+
   console.log(`word is now: ${word}`);
-  images.forEach((element) => {
-    console.log(`${element.title}: ${element.description}`);
-  });
+  // images.forEach((element) => {
+  //   console.log(`${element.title}: ${element.description}`);
+  // });
   // console.log(UNSPLASH_RAND_PHOTO_URL);
 
   return (
@@ -50,7 +55,7 @@ const App = () => {
         <Row xs={1} md={2} lg={3}>
           {images.map((image, index) => (
             <Col key={index} className="pb-4">
-              <ImageCard image={image} />
+              <ImageCard image={image} deleteEvent={handleDeleteImage} />
             </Col>
           ))}
         </Row>

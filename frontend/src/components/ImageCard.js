@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-const ImageCard = ({ image }) => {
+const ImageCard = ({ image, deleteEvent }) => {
   return (
     <Card style={{ width: '18rem' }}>
       {image.urls.small && <Card.Img variant="top" src={image.urls.small} />}
@@ -11,7 +11,9 @@ const ImageCard = ({ image }) => {
         <Card.Text>
           Created by: {`${image.user.first_name} ${image.user.last_name}`}
         </Card.Text>
-        <Button variant="primary">Delete</Button>
+        <Button variant="primary" onClick={() => deleteEvent(image.id)}>
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );
