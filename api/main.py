@@ -5,6 +5,7 @@ import os
 from flask_cors import CORS
 from mongo_client import client
 import json
+from bson import json_util
 
 app = Flask(__name__)
 CORS(app)
@@ -52,9 +53,13 @@ def get_image():
 def images():
     if request.method == "GET":
         # read images from the database
-        search_word = request.args.get("query")
-        result = image_collection.find({"name": search_word})
-        result_json = jsonify([img for img in result])
+        search = request.get_json()
+        print("the search is: ", search)
+        # convert pymongo into list
+        results = list(image_collection.find({search}))
+        # sanitize json object id
+        result_json = jsonify([json.loads(json_util.dumps(img)) for img in results])
+        print(result_json)
         return result_json
     if request.method == "POST":
         # save images from the database
