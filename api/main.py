@@ -1,3 +1,4 @@
+from pickle import TRUE
 from flask import request, Flask
 from requests import get
 from dotenv import load_dotenv
@@ -9,7 +10,10 @@ app = Flask(__name__)
 load_dotenv(dotenv_path="./.env.local")
 UNSPLASH_URL = os.getenv('UNSPLASH_URL', '')
 UNSPLASH_KEY = os.getenv('UNSPLASH_KEY', '')
+DEBUG = bool(os.getenv('DEBUG',True))
 
+# enable debug mode
+app.config["DEBUG"]=DEBUG
 
 @app.route("/")
 def hello():
