@@ -3,9 +3,10 @@ from flask import request, Flask
 from requests import get
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # load in env variables
 load_dotenv(dotenv_path="./.env.local")
 UNSPLASH_URL = os.getenv('UNSPLASH_URL', '')

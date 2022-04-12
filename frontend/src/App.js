@@ -6,15 +6,15 @@ import Welcome from './components/Welcome';
 import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
-const UNSPLASH_SECRET = process.env.REACT_APP_UNSPLASH_SECRET;
-const UNSPLASH_RAND_PHOTO_URL = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_RAND_ENDPOINT}`;
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
+const API_END_POINT = process.env.REACT_APP_RAND_ENDPOINT || '/new-image';
+const UNSPLASH_RAND_PHOTO_URL = `${API_URL}${API_END_POINT}`;
 
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
 
-  const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}&client_id=${UNSPLASH_KEY}`;
+  const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}`;
 
   const handleSearchSubmit = (e) => {
     // some debugging here
