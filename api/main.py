@@ -15,6 +15,8 @@ UNSPLASH_KEY = os.getenv('UNSPLASH_KEY', '')
 def hello():
     return "Hello world"
 
+if not UNSPLASH_KEY:
+    raise EnvironmentError("Please create .env.local file that has an unsplash key")
 
 @app.route("/new-image")
 def get_image():
