@@ -36,13 +36,18 @@ const App = () => {
   };
 
   console.log(`word is now: ${word}`);
+  images.forEach((element) => {
+    console.log(`${element.title}: ${element.description}`);
+  });
   // console.log(UNSPLASH_RAND_PHOTO_URL);
 
   return (
     <div>
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} queryEvent={handleSearchSubmit} />
-      {!!images.length && <ImageCard image={images[0]} />}
+      {images.map((image, index) => (
+        <ImageCard image={image} key={index} />
+      ))}
     </div>
   );
 };
