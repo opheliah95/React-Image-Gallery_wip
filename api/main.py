@@ -54,7 +54,12 @@ def get_image():
 def images():
     if request.method == "GET":
         # read images from the database
-        search = request.get_json()
+        # fix request content type
+        search = {}
+        try:
+            search = request.get_json(force=True)
+        except:
+            print("there is a error")
         print("the search is: ", search)
         # convert pymongo into list
         results = list(image_collection.find(search))
