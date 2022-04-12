@@ -56,11 +56,19 @@ const App = () => {
 
   // function to trigger save function
   const handleSaveImage = async (id) => {
+    const imageToBeSaved = images.find((img) => img.id === id);
+    // add save property to image
+    imageToBeSaved.saved = true;
     try {
       console.log('the id is', id);
-      const imageToBeSaved = images.find((img) => img.id === id);
       // post the data to route hosting img
       const result = await axios.post(ALL_SAVED_IMAGE_ROUTE, imageToBeSaved);
+      if (result.data?.inserted_id) {
+        // Add saved field to all local image affected in state
+        images.map((image) =>
+          image.id === id ? { ...image, saved: true } : image
+        );
+      }
       console.log('operation successful', result.data);
     } catch (err) {
       console.log(err);

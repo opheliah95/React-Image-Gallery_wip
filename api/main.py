@@ -80,6 +80,7 @@ def images():
 
         # update object type to string val only
         image["_id"] = str(image["id"])
+        image["saved"] = True
         print("the image is: ", image)
         result = image_collection.insert_one(image)
 
@@ -87,6 +88,8 @@ def images():
             {
                 "result": f"The post request is successful"
                 f" and id is {result.inserted_id}",
+                "saved": image["saved"],
+                "inserted_id": result.inserted_id,
             }
         )
 
