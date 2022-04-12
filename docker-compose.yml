@@ -18,3 +18,22 @@ services:
       - /app/.venv # virenv contents stay the same
       - ./api:/app # map everything else to app folder
     restart: always
+
+  # mongodb docker image
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ADMINUSERNAME:?err}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ADMINPASSWORD:?err}
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_ADMINUSERNAME:?err}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_ADMINPASSWORD:?err}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGODB_ADMINUSERNAME}:${MONGODB_ADMINPASSWORD}@mongo:27017/
+    depends_on: 
+      - mongo
