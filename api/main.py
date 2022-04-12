@@ -56,11 +56,18 @@ def images():
         search = request.get_json()
         print("the search is: ", search)
         # convert pymongo into list
-        results = list(image_collection.find({search}))
-        # sanitize json object id
-        result_json = jsonify([json.loads(json_util.dumps(img)) for img in results])
-        print(result_json)
-        return result_json
+        results = list(image_collection.find(search))
+        print(results)
+        if len(results) > 0:
+            # sanitize json object id
+            result_json = jsonify([json.loads(json_util.dumps(img)) for img in results])
+            return result_json
+        else:
+            return jsonify(
+                {
+                    "error": f"there is no matching result for {search}",
+                }
+            )
     if request.method == "POST":
         # save images from the database
         image = request.get_json()
