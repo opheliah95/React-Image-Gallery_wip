@@ -27,15 +27,12 @@ const App = () => {
       });
     e.preventDefault();
 
-     // set the word to empty string
-     setWord("");
+    // set the word to empty string
+    setWord("");
   };
 
   console.log(`word is now: ${word}`);
   // console.log(UNSPLASH_RAND_PHOTO_URL);
-
- 
-
 
   return (
     <div>
