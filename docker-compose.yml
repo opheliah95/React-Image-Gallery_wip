@@ -4,7 +4,14 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
+    volumes:
+      - /app/node_modules # contents of node_module stay the same
+      - ./frontend:/app # map everything else to the frontend
+
   backend:
     build: ./api
     ports:
       - "5050:5050"
+    volumes:
+      - /app/.venv # virenv contents stay the same
+      - ./api:/app # map everything else to app folder
