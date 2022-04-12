@@ -78,7 +78,7 @@ def images():
         myquery = {"_id": ObjectId(result.inserted_id)}
         image["_id"] = str(result.inserted_id)
         print("the image is: ", image)
-        image_collection.insert_one(image)
+        result = image_collection.insert_one(image)
         image_collection.delete_one(myquery)
 
         return jsonify(
