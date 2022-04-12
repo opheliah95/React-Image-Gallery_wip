@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "==1.1.2"
 requests = "*"
 flask-cors = "*"
 python-dotenv = "*"
 pymongo = "*"
+jinja2 = "==3.0.3"
+flask = "*"
 
 [dev-packages]
 black = "*"

@@ -3,6 +3,7 @@ from requests import get
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS
+from mongo_client import insert_test_documents
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,8 @@ DEBUG = bool(os.getenv("DEBUG", True))
 
 # enable debug mode
 app.config["DEBUG"] = DEBUG
+
+insert_test_documents()
 
 
 @app.route("/")

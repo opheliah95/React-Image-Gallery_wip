@@ -8,3 +8,6 @@
 
 # vscode generated
 .vscode
+
+# python related
+*__pycache__
