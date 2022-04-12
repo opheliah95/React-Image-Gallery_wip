@@ -9,7 +9,10 @@ const UNSPLASH_RAND_PHOTO_URL = `${process.env.REACT_APP_API_URL}${process.env.R
 
 const App = () => {
   const [word, setWord] = useState('');
+  const [images, setImages] = useState([]);
+
   const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}&client_id=${UNSPLASH_KEY}`;
+  console.log(images);
 
   const handleSearchSubmit = (e) => {
     // some debugging here
@@ -20,7 +23,9 @@ const App = () => {
     fetch(UNSPLASH_RAND_QUERY_STRING)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // update existing image array
+        // save image
+        setImages([data, ...images]);
       })
       .catch((err) => {
         console.log(`the error is: ${err}`);
