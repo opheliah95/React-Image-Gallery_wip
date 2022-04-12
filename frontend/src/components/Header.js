@@ -15,7 +15,7 @@ const Header = (props) => {
     <Navbar style={navBarStyle}>
       <Container>
         <Navbar.Brand href="/" style={navBarBrandStyle}>
-          <Logo style={{ maxWidth: '20rem', maxHeight: '3rem' }} />
+          <Logo alt={title} style={{ maxWidth: '20rem', maxHeight: '3rem' }} />
         </Navbar.Brand>
       </Container>
     </Navbar>
