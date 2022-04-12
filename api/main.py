@@ -6,6 +6,7 @@ from flask_cors import CORS
 from mongo_client import client
 import json
 from bson import json_util
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 CORS(app)
@@ -72,10 +73,18 @@ def images():
         # save images from the database
         image = request.get_json()
         result = image_collection.insert_one(image)
+
+        # update object type to string val only
+        myquery = {"_id": ObjectId(result.inserted_id)}
+        image["_id"] = str(result.inserted_id)
+        print("the image is: ", image)
+        image_collection.insert_one(image)
+        image_collection.delete_one(myquery)
+
         return jsonify(
             {
                 "result": f"The post request is successful"
-                f"and id is {result.inserted_id}",
+                f" and id is {result.inserted_id}",
             }
         )
 
