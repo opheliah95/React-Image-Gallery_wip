@@ -54,7 +54,20 @@ const App = () => {
     setImages(images.filter((image) => image.id !== id));
   };
 
-  console.log(`word is now: ${word}`);
+  // function to trigger save function
+  const handleSaveImage = async (id) => {
+    try {
+      console.log('the id is', id);
+      const imageToBeSaved = images.find((img) => img.id === id);
+      // post the data to route hosting img
+      const result = await axios.post(ALL_SAVED_IMAGE_ROUTE, imageToBeSaved);
+      console.log('operation successful', result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // console.log(`word is now: ${word}`);
   // images.forEach((element) => {
   //   console.log(`${element.title}: ${element.description}`);
   // });
@@ -69,7 +82,11 @@ const App = () => {
           <Row xs={1} md={2} lg={3}>
             {images.map((image, index) => (
               <Col key={index} className="pb-4">
-                <ImageCard image={image} deleteEvent={handleDeleteImage} />
+                <ImageCard
+                  image={image}
+                  deleteEvent={handleDeleteImage}
+                  saveEvent={handleSaveImage}
+                />
               </Col>
             ))}
           </Row>
