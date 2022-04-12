@@ -58,7 +58,14 @@ def images():
         return result_json
     if request.method == "POST":
         # save images from the database
-        return
+        image = request.get_json()
+        result = image_collection.insert_one(image)
+        return jsonify(
+            {
+                "result": f"The post request is successful"
+                f"and id is {result.inserted_id}",
+            }
+        )
 
 
 if __name__ == "__main__":
