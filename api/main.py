@@ -1,4 +1,3 @@
-from pickle import TRUE
 from flask import request, Flask
 from requests import get
 from dotenv import load_dotenv
