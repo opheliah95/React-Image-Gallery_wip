@@ -16,8 +16,6 @@ DEBUG = bool(os.getenv("DEBUG", True))
 # enable debug mode
 app.config["DEBUG"] = DEBUG
 
-insert_test_documents()
-
 
 @app.route("/")
 def hello():
