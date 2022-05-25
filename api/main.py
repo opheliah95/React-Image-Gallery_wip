@@ -94,5 +94,16 @@ def images():
         )
 
 
+@app.route("/images/<image_id>", methods=["DELETE"])
+def delete_images(image_id):
+    if request.method == "DELETE":
+        # delete from database
+        return jsonify(
+            {
+                "result": f"Image deleted: {image_id}",
+            }
+        )
+
+
 if __name__ == "__main__":
     app.run(port=5050, host="0.0.0.0")
