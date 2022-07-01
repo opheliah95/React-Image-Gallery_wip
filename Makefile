@@ -5,7 +5,7 @@ build-cached:
 	docker-compose build
 
 up:
-	docker-compose up
+	docker-compose up -d
 
 run-clean: build up
 
