@@ -50,8 +50,13 @@ const App = () => {
   };
 
   // function to trigger delete function
-  const handleDeleteImage = (id) => {
+  const handleDeleteImage = async (id) => {
     setImages(images.filter((image) => image.id !== id));
+    const imageToBeDeleted = images.find((img) => img.id == id);
+    const result = await axios.delete(ALL_SAVED_IMAGE_ROUTE, imageToBeDeleted);
+    if (result.data?.deleted_id) {
+      console.log(`delete operation successful  \n${result.data} removed`);
+    }
   };
 
   // function to trigger save function

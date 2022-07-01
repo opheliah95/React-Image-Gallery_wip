@@ -98,11 +98,12 @@ def images():
 def delete_images(image_id):
     if request.method == "DELETE":
         # delete from database
-        return jsonify(
-            {
-                "result": f"Image deleted: {image_id}",
-            }
-        )
+        myquery = {"_id": image_id}
+        query_state = image_collection.find_one(myquery)
+        print(query_state)
+        result = image_collection.delete_one(myquery)
+        print(result)
+        return {"deleted_id": image_id}
 
 
 if __name__ == "__main__":
