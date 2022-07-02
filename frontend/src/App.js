@@ -54,8 +54,13 @@ const App = () => {
     setImages(images.filter((image) => image.id !== id));
     const imageToBeDeleted = images.find((img) => img.id === id);
     console.log(ALL_SAVED_IMAGE_ROUTE);
-    const url = `${ALL_SAVED_IMAGE_ROUTE}\\${imageToBeDeleted}`;
-    const result = await axios.delete(url);
+    const config = {
+      headers: {
+        'Access-Control-Allow-Origin': true,
+      },
+    };
+    // post the data to route hosting img
+    const result = await axios.delete(`${ALL_SAVED_IMAGE_ROUTE}/${id}`, config);
     if (result.data?.deleted_id) {
       console.log(
         `Delete operation successful!  \n${JSON.stringify(result.data)} removed`
