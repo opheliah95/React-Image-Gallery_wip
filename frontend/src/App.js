@@ -60,11 +60,20 @@ const App = () => {
       },
     };
     // post the data to route hosting img
-    const result = await axios.delete(`${ALL_SAVED_IMAGE_ROUTE}/${id}`, config);
-    if (result.data?.deleted_id) {
-      console.log(
-        `Delete operation successful!  \n${JSON.stringify(result.data)} removed`
+    try {
+      const result = await axios.delete(
+        `${ALL_SAVED_IMAGE_ROUTE}/${id}`,
+        config
       );
+      if (result.data?.deleted_id) {
+        console.log(
+          `Delete operation successful!  \n${JSON.stringify(
+            result.data
+          )} removed`
+        );
+      }
+    } catch (err) {
+      console.log(`during deletion, we encountered ${err}`);
     }
   };
 
