@@ -52,10 +52,14 @@ const App = () => {
   // function to trigger delete function
   const handleDeleteImage = async (id) => {
     setImages(images.filter((image) => image.id !== id));
-    const imageToBeDeleted = images.find((img) => img.id == id);
-    const result = await axios.delete(ALL_SAVED_IMAGE_ROUTE, imageToBeDeleted);
+    const imageToBeDeleted = images.find((img) => img.id === id);
+    console.log(ALL_SAVED_IMAGE_ROUTE);
+    const url = `${ALL_SAVED_IMAGE_ROUTE}\\${imageToBeDeleted}`;
+    const result = await axios.delete(url);
     if (result.data?.deleted_id) {
-      console.log(`delete operation successful  \n${result.data} removed`);
+      console.log(
+        `Delete operation successful!  \n${JSON.stringify(result.data)} removed`
+      );
     }
   };
 
