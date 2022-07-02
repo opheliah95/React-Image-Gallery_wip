@@ -51,9 +51,6 @@ const App = () => {
 
   // function to trigger delete function
   const handleDeleteImage = async (id) => {
-    setImages(images.filter((image) => image.id !== id));
-    const imageToBeDeleted = images.find((img) => img.id === id);
-    console.log(ALL_SAVED_IMAGE_ROUTE);
     const config = {
       headers: {
         'Access-Control-Allow-Origin': true,
@@ -66,6 +63,7 @@ const App = () => {
         config
       );
       if (result.data?.deleted_id) {
+        setImages(images.filter((image) => image.id !== id));
         console.log(
           `Delete operation successful!  \n${JSON.stringify(
             result.data
