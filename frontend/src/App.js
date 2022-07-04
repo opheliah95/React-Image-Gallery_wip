@@ -4,9 +4,11 @@ import Search from './components/Search';
 import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Toast } from 'react-bootstrap';
 import axios from 'axios';
 import Loader from './components/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 const API_END_POINT = process.env.REACT_APP_RAND_ENDPOINT || '/new-image';
@@ -22,6 +24,7 @@ const App = () => {
 
   const getSavedImages = async () => {
     try {
+      toast.success('Saved all downloaded images');
       const result = await axios.get(ALL_SAVED_IMAGE_ROUTE);
       setSpinner(false);
       console.log(`print our result out:`, result.data);
@@ -40,6 +43,7 @@ const App = () => {
 
     try {
       const result = await axios.get(UNSPLASH_RAND_QUERY_STRING);
+      toast.success(`Result for ${word} has been found`);
       console.log(`print our result out:`, result.data);
       let data = result.data;
       setImages([{ ...data, title: word }, ...images]);
@@ -108,6 +112,17 @@ const App = () => {
   return (
     <div>
       <Header title="Images Gallery" />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {loading ? (
         <Loader />
       ) : (
