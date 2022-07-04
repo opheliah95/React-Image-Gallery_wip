@@ -7,7 +7,7 @@ const footer_style = {
 };
 
 const ImageCard = ({ image, deleteEvent, saveEvent }) => {
-  const author_name = image.user?.name;
+  const author_name = image.user?.name || 'no author name';
   const proto_url = image.user?.portfolio_url;
   return (
     <Card style={{ width: '18rem' }}>
