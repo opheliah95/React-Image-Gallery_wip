@@ -6,6 +6,7 @@ import Welcome from './components/Welcome';
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import Loader from './components/Spinner';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 const API_END_POINT = process.env.REACT_APP_RAND_ENDPOINT || '/new-image';
@@ -105,6 +106,7 @@ const App = () => {
   return (
     <div>
       <Header title="Images Gallery" />
+      <Loader />
       <Search word={word} setWord={setWord} queryEvent={handleSearchSubmit} />
       <Container className="mt-4">
         {images.length ? (
