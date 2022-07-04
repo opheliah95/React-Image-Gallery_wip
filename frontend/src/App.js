@@ -15,6 +15,7 @@ const UNSPLASH_RAND_PHOTO_URL = `${API_URL}${API_END_POINT}`;
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
+  const [loading, setSpinner] = useState(true);
 
   const UNSPLASH_RAND_QUERY_STRING = `${UNSPLASH_RAND_PHOTO_URL}?query=${word}`;
   const ALL_SAVED_IMAGE_ROUTE = `${API_URL}/images`;
@@ -22,6 +23,7 @@ const App = () => {
   const getSavedImages = async () => {
     try {
       const result = await axios.get(ALL_SAVED_IMAGE_ROUTE);
+      setSpinner(false);
       console.log(`print our result out:`, result.data);
       let data = result.data.length > 0 ? result.data : [];
       setImages(data || []);
@@ -106,25 +108,34 @@ const App = () => {
   return (
     <div>
       <Header title="Images Gallery" />
-      <Loader />
-      <Search word={word} setWord={setWord} queryEvent={handleSearchSubmit} />
-      <Container className="mt-4">
-        {images.length ? (
-          <Row xs={1} md={2} lg={3}>
-            {images.map((image, index) => (
-              <Col key={index} className="pb-4">
-                <ImageCard
-                  image={image}
-                  deleteEvent={handleDeleteImage}
-                  saveEvent={handleSaveImage}
-                />
-              </Col>
-            ))}
-          </Row>
-        ) : (
-          <Welcome />
-        )}
-      </Container>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <Search
+            word={word}
+            setWord={setWord}
+            queryEvent={handleSearchSubmit}
+          />
+          <Container className="mt-4">
+            {images.length ? (
+              <Row xs={1} md={2} lg={3}>
+                {images.map((image, index) => (
+                  <Col key={index} className="pb-4">
+                    <ImageCard
+                      image={image}
+                      deleteEvent={handleDeleteImage}
+                      saveEvent={handleSaveImage}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Welcome />
+            )}
+          </Container>
+        </div>
+      )}
     </div>
   );
 };

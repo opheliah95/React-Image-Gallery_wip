@@ -8,7 +8,7 @@ body {
 }
 
 .center-div {
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  position: absolute;
+  top: calc(50% - 1rem);
+  left: calc(50% - 1rem);
 }
