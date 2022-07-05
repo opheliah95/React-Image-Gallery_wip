@@ -71,14 +71,17 @@ const App = () => {
       );
       if (result.data?.deleted_id) {
         setImages(images.filter((image) => image.id !== id));
+        const del_img = images.find((image) => image.id === id);
         console.log(
           `Delete operation successful!  \n${JSON.stringify(
             result.data
           )} removed`
         );
+        toast.warn(`Image ${del_img.title} has been deleted`);
       }
     } catch (err) {
       console.log(`during deletion, we encountered ${err}`);
+      toast.error(`An error occurred: ${err}`);
     }
   };
 
@@ -96,10 +99,12 @@ const App = () => {
         images.map((image) =>
           image.id === id ? { ...image, saved: true } : image
         );
+        toast.info(`Image ${imageToBeSaved.title} has been saved successfully`);
       }
       console.log('operation successful', result.data);
     } catch (err) {
       console.log(err);
+      toast.error(`An error occurred: ${err}`);
     }
   };
 
