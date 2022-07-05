@@ -81,7 +81,7 @@ const App = () => {
       }
     } catch (err) {
       console.log(`during deletion, we encountered ${err}`);
-      toast.error(`An error occurred: ${err}`);
+      toast.error(`An error occurred: ${err.message}`);
     }
   };
 
@@ -104,7 +104,7 @@ const App = () => {
       console.log('operation successful', result.data);
     } catch (err) {
       console.log(err);
-      toast.error(`An error occurred: ${err}`);
+      toast.error(`An error occurred: ${err.message}`);
     }
   };
 
